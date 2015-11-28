@@ -19,3 +19,7 @@ Running the container
 
 	docker run --name jupyter -d -p 8888:8888 czotti/jupyter
 
+Or if you want to save notebook on your system
+
+    docker run --name jupyter -d -p 8888:8888 -v /path/in/system/notebooks:/notebooks czotti/jupyter
+
