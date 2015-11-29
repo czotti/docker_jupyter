@@ -17,6 +17,7 @@ RUN pip3 install scikit-learn
 RUN pip3 install matplotlib
 RUN pip3 install scikit-image
 RUN pip3 install pandas
+RUN pip3 install theano
 RUN pip3 install h5py
 
 # Python 2 environment
@@ -27,7 +28,8 @@ RUN pip2 install scikit-learn
 RUN pip2 install matplotlib
 RUN pip2 install scikit-image
 RUN pip2 install pandas
-RUN pip3 install h5py
+RUN pip2 install theano
+RUN pip2 install h5py
 
 EXPOSE 8888
 
