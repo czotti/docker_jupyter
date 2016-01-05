@@ -10,24 +10,24 @@ RUN apt-get -y install gcc gfortran make
 RUN apt-get -y install libpng3 libfreetype6-dev libhdf5-serial-dev libjpeg-dev
 
 # Python 3 environment
-RUN pip3 install Cython \
-                 numpy \
-                 scipy \
-                 scikit-learn \
-                 matplotlib \
-                 scikit-image \
-                 pandas \
-                 h5py
+RUN pip3 install Cython &&\
+    pip3 install numpy &&\
+    pip3 install scipy &&\
+    pip3 install scikit-learn &&\
+    pip3 install matplotlib &&\
+    pip3 install scikit-image &&\
+    pip3 install pandas &&\
+    pip3 install h5py
 
 # Python 2 environment
-RUN pip2 install Cython \
-                 numpy \
-                 scipy \
-                 scikit-learn \
-                 matplotlib \
-                 scikit-image \
-                 pandas \
-                 h5py
+RUN pip2 install Cython &&\
+    pip2 install numpy &&\
+    pip2 install scipy &&\
+    pip2 install scikit-learn &&\
+    pip2 install matplotlib &&\
+    pip2 install scikit-image &&\
+    pip2 install pandas &&\
+    pip2 install h5py
 
 EXPOSE 8888
 
