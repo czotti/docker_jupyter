@@ -11,6 +11,7 @@ Install on this docker:
     matplotlib
     scikit-image
     pandas
+    theano
     h5py
     nibabel
     ipdb
