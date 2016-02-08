@@ -4,9 +4,16 @@ This is my first time trying to work with docker containers.
 
 Install on this docker:
 
+    Cython
 	numpy
 	scipy
 	scikit-learn
+    matplotlib
+    scikit-image
+    pandas
+    h5py
+    nibabel
+    ipdb
 
 # Build
 Clone the repository
