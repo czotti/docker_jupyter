@@ -1,37 +1,37 @@
-FROM jupyter/notebook
+FROM base/archlinux
 MAINTAINER Clement ZOTTI <clement.zotti@usherbrooke.ca>
 
-RUN apt-get update -y
-# Install png, freetype and jpeg for pillow and matplotlib
-# Install hdf5 for h5py
-RUN apt-get -y install liblapack-dev libblas-dev gcc gfortran make libpng3 libfreetype6-dev libhdf5-serial-dev libjpeg-dev
 
-# Python 3 environment
-RUN pip3 install Cython &&\
-    pip3 install numpy &&\
-    pip3 install scipy &&\
-    pip3 install scikit-learn &&\
-    pip3 install matplotlib &&\
-    pip3 install scikit-image &&\
-    pip3 install pandas &&\
-    pip3 install theano &&\
-    pip3 install nibabel &&\
-    pip3 install ipdb &&\
-    pip3 install h5py
+RUN pacman-key --populate
+RUN pacman-key --refresh-keys
+RUN pacman -Sy --noprogressbar --noconfirm
 
-# Python 2 environment
-RUN pip2 install Cython &&\
-    pip2 install numpy &&\
-    pip2 install scipy &&\
-    pip2 install scikit-learn &&\
-    pip2 install matplotlib &&\
-    pip2 install scikit-image &&\
-    pip2 install pandas &&\
-    pip3 install theano &&\
-    pip3 install nibabel &&\
-    pip3 install ipdb &&\
-    pip2 install h5py
+RUN pacman -Syyu --noprogressbar --noconfirm
+RUN pacman-db-upgrade
+
+
+RUN pacman -S --noprogressbar --noconfirm base-devel python2 python3 \
+    lapack blas python{2,}-numpy python{2,}-pip python{2,}-pandas \
+    python{2,}-scikit-learn python-h5py hdf5 jupyter-notebook \
+    python{2,}-numexpr git ipython2-notebook cuda mathjax
+RUN pacman -Scc --noconfirm
+
+RUN git clone git://github.com/Theano/Theano.git && \
+    cd Theano && \
+    python setup.py develop --user && \
+    python2 setup.py develop --user
+
+RUN pip2 install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.7.1-cp27-none-linux_x86_64.whl
+
+RUN pip install --upgrade http://ci.tensorflow.org/view/Nightly/job/nigntly-matrix-linux-gpu/TF_BUILD_CONTAINER_TYPE=GPU,TF_BUILD_IS_OPT=OPT,TF_BUILD_IS_PIP=PIP,TF_BUILD_PYTHON_VERSION=PYTHON3,label=gpu-slave/lastSuccessfulBuild/artifact/pip_test/whl/tensorflow-0.7.0-py3-none-any.whl
+
+RUN pip install nibabel ipdb
+RUN pip2 install nibabel ipdb
+
+RUN mkdir notebooks
+
+ADD ./jupyter.sh /
 
 EXPOSE 8888
 
-CMD jupyter notebook
+CMD ./jupyter.sh
