@@ -31,6 +31,8 @@ RUN pip2 install nibabel ipdb
 
 RUN mkdir notebooks
 
+ADD ./jupyter.sh /
+
 EXPOSE 8888
 
-CMD jupyter notebook --ip=0.0.0.0 --notebook-dir=/notebooks
+CMD ./jupyter.sh
