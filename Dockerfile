@@ -13,7 +13,7 @@ RUN pacman-db-upgrade
 RUN pacman -S --noprogressbar --noconfirm base-devel python2 python3 \
     lapack blas python{2,}-numpy python{2,}-pip python{2,}-pandas \
     python{2,}-scikit-learn python-h5py hdf5 jupyter-notebook \
-    python{2,}-numexpr git ipython2-notebook cuda
+    python{2,}-numexpr git ipython2-notebook cuda mathjax
 RUN pacman -Scc --noconfirm
 
 RUN git clone git://github.com/Theano/Theano.git && \
