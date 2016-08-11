@@ -6,8 +6,7 @@ RUN pacman-key --populate && \
     pacman-key --refresh-keys && \
     pacman -Sy --noprogressbar --noconfirm archlinux-keyring && \
     pacman -Sy --noprogressbar --noconfirm && \
-    pacman -Syyu --noprogressbar --noconfirm && \
-    pacman-db-upgrade
+    pacman -Syyu --noprogressbar --noconfirm
 
 # Install python and all dependencies needed
 RUN pacman -S --noprogressbar --noconfirm base-devel python2 python3 \
